@@ -1,4 +1,5 @@
 (function($){
+
     var findImg = 'cs-gallery-image'; // this is the class user uses to define an image for the gallery
     var thumbClass = 'cs-gallery-small';// this class is added to the thumb images
     var imgs = $('.cs-gallery-image');
@@ -46,13 +47,13 @@
             
             topImage.css({'background-image': 'url('+src+')' }).attr('data-src', src);
             $('.cs-img-title').html(title);
-            $(this).clone().appendTo(thumbs).css({'float':'left','height':'50px'}).removeClass(findImg).addClass(thumbClass).attr('id', 'cs-img-'+count);
+            $(this).clone().appendTo(thumbs).removeClass(findImg).addClass(thumbClass).attr('id', 'cs-img-'+count);
             cw = cw + $(this).width();
             ch = ch + $(this).height();
         } 
         
         else {
-            $(this).clone().appendTo(thumbs).css({'float':'left','height':'50px'}).removeClass(findImg).addClass(thumbClass).attr('id', 'cs-img-'+count);
+            $(this).clone().appendTo(thumbs).removeClass(findImg).addClass(thumbClass).attr('id', 'cs-img-'+count);
             cw = cw + $(this).width()
         }
         count++;
@@ -85,7 +86,7 @@
             position += scroll_distance;
             var move = position + "px";
             thumbs.attr('style','')
-            thumbs.css({'right': move,'width': final_width});
+            thumbs.css({'right': move, 'width': final_width});
         }
 
     });
@@ -119,7 +120,7 @@
         var top = ( (win_height - img_height) / 2 ) + 'px';
         var left = ( (win_width - img_width) / 2 ) + 'px';
 
-        $('#overlay-image').css({'position':'fixed','top': top, 'left': left});
+        $('#overlay-image').css({'top': top, 'left': left});
         
     });
     
