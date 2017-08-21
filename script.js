@@ -1,3 +1,4 @@
+/* code below is for the embeded gallery */
 (function($){
     var findImg = 'cs-gallery-image'; // this is the class user uses to define an image for the gallery
     var thumbClass = 'cs-gallery-small';// this class is added to the thumb images
@@ -25,10 +26,6 @@
     var cs_lightbox = '<div class="cs-gallery-overlay"><span id="cs_gallery_close">';
     cs_lightbox += lightbox_close;
     cs_lightbox += '</span><img id="overlay-image" src="{{IMG_SRC}}" /></div>';
-    // store the total combined width's of images to calculate container size later
-    var cw = 0;
-    // store a single height value to get a ratio
-    var ch = 0
     // store the thumbs div reference
     var thumbs = $('#cs-thumbs');
     // store top image div refernce
@@ -47,29 +44,39 @@
             topImage.css({'background-image': 'url('+src+')' }).attr('data-src', src);
             $('.cs-img-title').html(title);
             $(this).clone().appendTo(thumbs).css({'float':'left','height':'50px'}).removeClass(findImg).addClass(thumbClass).attr('id', 'cs-img-'+count);
-            cw = cw + $(this).width();
-            ch = ch + $(this).height();
-            console.log(cw)
             // remove the original image tag
+            var NEXT = $(this).next();
+            if ($(this).next().is('br')) {
+               $(this).next().remove();
+            }
             $(this).remove();
         } 
         
         else {
             $(this).clone().appendTo(thumbs).css({'float':'left','height':'50px'}).removeClass(findImg).addClass(thumbClass).attr('id', 'cs-img-'+count);
-            cw = cw + $(this).width();
+
             // remove the original image tag
+            var NEXT = $(this).next();
+            if ($(this).next().is('br')) {
+               $(this).next().remove();
+            }
             $(this).remove();
         }
         count++;
         
     });
-    
     /* calculate and set width of thumbs container */
-    var ratio = ch / 50;
+    var totalWidth = 0;
+    var margin = ( count + 1 ) * 20;
     var cs_gallery_width = $('#cs-gallery').width();
-    var total_width = Math.round( (cw / ratio));
+     
+    $('#cs-thumbs').children().each(function() {
+      totalWidth = totalWidth + $(this).width();
+    });
 
+    var total_width = totalWidth + margin + 300;
     var final_width = total_width+"px";
+    
     thumbs.css({'width': final_width});
     // change the main image to one of the thumb images 
     $("[id^=cs-img-]").click(function () {
@@ -87,6 +94,7 @@
     
     // Right carousel button
     right.click(function(){
+    
         if ( position < ( total_width - cs_gallery_width) ) {
             position += scroll_distance;
             var move = position + "px";
@@ -98,6 +106,7 @@
     
     // Left carousel button
     left.click(function(){
+    
         if( position > scroll_distance ) {
             position -= scroll_distance;
             var move = position + "px";
@@ -109,6 +118,7 @@
             var move = position + "px";
             thumbs.css({'right': move,'width': final_width});
         }
+        
     });
     
     // make the main image clickable producing an overlay

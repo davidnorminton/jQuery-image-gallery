@@ -3,6 +3,7 @@ body, html {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 main {
     width: 600px;
@@ -11,6 +12,7 @@ main {
     height: 100%;
     padding: 10px;
 }
+/* embeded gallery styles */
 .cs-gallery-image {
     display: none;
 }
@@ -63,7 +65,7 @@ main {
 .cs-img-title{
     position: absolute;
     bottom: 0;
-    height: 25px;
+    height: 35px;
     width: 100%;
     background: rgba(27, 26, 26, 0.82);
     font-size: 20px;
@@ -81,6 +83,7 @@ main {
     height: 72px;
     overflow: hidden;
     position: relative;
+    min-width: 100%;
 }
 #cs-thumbs-cont {
     position: relative;
@@ -96,7 +99,7 @@ main {
     z-index: 1;
     color: orange;
     font-size: 30px;
-    padding-top: 20px;
+    padding-top: 15px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -108,13 +111,13 @@ main {
     position: absolute;
     right: 0;
     width: 35px;
-    top: 3px;
+    top: 0;
     background: rgba(0, 0, 0, 0.57);
     height: 100%;
     z-index: 1;
     color: orange;
     font-size: 30px;
-    padding-top: 20px;
+    padding-top: 15px;
     cursor: pointer;
 }
 #cs-r i{
@@ -122,3 +125,4 @@ main {
     right: 10px;
 
 }
+/* end gallery styles */
